@@ -6,4 +6,4 @@ A simple quiz game built with HTML, CSS, JavaScript, and Node.js. Features two l
 - Two difficulty levels
 - Interactive UI
 - JavaScript game logic
-- Node.js backend (if applicable)
+- Node.js backend 
