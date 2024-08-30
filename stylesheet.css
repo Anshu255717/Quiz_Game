@@ -1,0 +1,186 @@
+#playbttn
+{
+    color:black;
+    font-size:30px;
+    border:5px  solid aqua;
+    background-color:black;
+    position:absolute;
+    left:500px;
+    top:250px;
+    padding:10px 20px 10px 20px;
+}
+#choose
+{
+    border:8px groove white;
+    height:200px;
+    width:500px;
+    margin-left:350px;
+    position:relative;
+    background-color:rgb(29, 110, 110);
+}
+.astyle{
+    text-decoration:none;
+    color:darkseagreen;
+    font-size:40px;
+    position:absolute;
+    top:40px;
+    left:40px;
+    border:2px solid white;
+    padding:5px;
+    border-radius:10px;
+}
+.astyle:hover ,.astyles:hover
+{
+    background-color:cadetblue;
+    color:white;
+    border-radius:10px;
+    padding:5px;
+}
+.astyles{
+    text-decoration:none;
+    color:darkseagreen;
+    font-size:40px;
+    position:absolute;
+    top:120px;
+    left:40px;
+    border:2px solid white;
+    padding:5px;
+    border-radius:10px;
+}
+#quiz
+{
+    color:white;
+}
+#startb
+{
+    color:white;
+    text-decoration:none;
+}
+#timer
+{
+    color:white;
+}
+#result
+{
+    color:white;
+    position:absolute;
+    top:50px;
+    font-size:50px;
+}
+#qcontainer
+{
+    color:white;
+    position:absolute;
+    top:200px;
+    left:350px;
+    font-size:20px;
+}
+#starts
+{
+   color:white;
+   font-size:50px;
+   display:block;
+   position:absolute;
+   left:400px;
+   top:20px;
+}
+#tcontainer
+{
+   color:white;
+   display:block;
+   position:absolute;
+   top:350px;
+   left:350px;
+   font-size:20px;
+}
+#h1style
+{
+    color:black;
+    position:absolute;
+    top:150px;
+    left:360px;
+    font-size:50px;
+}
+#nextbtn
+{
+  background-color:white;
+  color:black;
+  font-size:25px;
+  padding:5px;
+  position:absolute;
+  top:350px;
+  left:850px;
+  font-weight:bolder;
+  border-radius:10px;
+}
+#results
+{
+    position:absolute;
+    top:10px;
+    width:800px;
+}
+#corrects
+{
+    display:none;
+    position:absolute;
+    top:250px;
+    left:150px;
+}
+#pstyles
+{
+    position:absolute;
+    bottom:10px;
+    width: 109ch;
+    white-space: nowrap;
+    overflow:hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 20px;
+    animation: typing 4s steps(109), blink 2s infinite;
+    color:rgb(21, 77, 77);
+}
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 109ch;
+    }
+}
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+#h1styless
+{
+    color:rgb(29, 110, 110);
+    margin-top:150px;
+    margin-left:350px;
+    width: 23ch;
+    white-space: nowrap;
+    overflow:hidden;
+    border-right: 3px solid;
+    font-size: 50px;
+    animation: typings 4s steps(23), blink 2s infinite;
+    border:2px solid white;
+    border-radius:15px;
+    padding:5px;
+}
+@keyframes typings {
+    from {
+        width: 0;
+        border:none;
+    }
+    to {
+        width: 23ch;
+        border:none;
+    }
+}
+#nextbtn:active {
+    box-shadow: 0px 5px 10px aqua;
+}
+#page1b
+{
+    background-color:cadetblue;
+}

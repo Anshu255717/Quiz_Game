@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <title>Quiz Game</title>
+    <style>
+        body 
+        {
+            background-image: url("quizbg.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body id="dbody">
+    <div id="starts">Quiz Game Level 2:</div>
+    <div id="qcontainer"></div>
+    <div id="tcontainer"></div>
+    <div id="nextbtn">NEXT</div>
+    <img src="" alt="correct" width="50px" height="50px" id="corrects">
+    <script>
+        let ans;
+        let questionsData;
+        let arr = [];
+        let intervalID;
+        let bonus = 0;
+        let i = 0;
+        document.addEventListener("DOMContentLoaded", () => 
+        {
+            const questions = document.getElementById("qcontainer");
+            const timer = document.getElementById("tcontainer");
+            const nextbutton = document.getElementById("nextbtn");
+            fetch("http://localhost:3001/data1.json")//fetching questions from  data1.json
+                .then(res => res.json())
+                .then(data => {
+                    questionsData = data;
+                    displayNextQues();
+                })
+                .catch(err => console.log(err));
+
+             nextbutton.addEventListener('click', () => {
+                document.getElementById('corrects').style.display="none";
+                clearInterval(intervalID);
+                displayNextQues();
+            });
+            document.getElementById("qcontainer").addEventListener('change', (event) => //radio button eventlistener
+            {
+                if (event.target.type === 'radio' && event.target.checked)
+                {
+                    let selectedop = event.target.value;
+                    if (selectedop === ans)
+                    {
+                        document.getElementById('corrects').src="tick.png";
+                        document.getElementById('corrects').style.display="inline-block";
+                        bonus++;
+                    }
+                    else
+                    {
+                        document.getElementById('corrects').src="cross.png";
+                        document.getElementById('corrects').style.display="inline-block";
+                    }
+                }
+            });
+            function findindex(min, max) //function to generate random index of question to be displayed 
+            {
+                let r;
+                do {
+                    r = Math.floor(Math.random() * (max - min)) + min;
+                } while (arr.includes(r));
+                arr.push(r);
+                return r;
+            }
+
+            function displayQuestion(ques, i) //function to display question 
+            {
+                const index = findindex(0, ques.length);
+                const q = `${i + 1}. ${ques[index].question}<br><br>
+                    <input type="radio" id="opA" name="option" value="A">
+                    <label for="opA">A. ${ques[index].A}</label><br>
+                    <input type="radio" id="opB" name="option" value="B">
+                    <label for="opB">B. ${ques[index].B}</label><br>
+                    <input type="radio" id="opC" name="option" value="C">
+                    <label for="opC">C. ${ques[index].C}</label><br>
+                    <input type="radio" id="opD" name="option" value="D">
+                    <label for="opD">D. ${ques[index].D}</label>`;
+                ans = ques[index].Ans;
+                questions.innerHTML = q;
+                Timer();
+            }
+
+            function displayNextQues()//main function to display questions one after another
+            {
+                if (i === 5) 
+                {
+                    document.getElementById("nextbtn").style.display = "none";
+                    questions.innerHTML = `<h2 id="results"><b>Congratulations!Quiz completed.. Your score is ${bonus}</b></h2>`;
+                    if (bonus === 4 || bonus === 5)
+                    {
+                        const back = document.getElementById("dbody");
+                        back.style.backgroundImage = "url('win.gif')";
+                        back.style.backgroundSize = "cover";
+                        document.getElementById("starts").style.display="none"; 
+                    }
+                    else
+                    {
+                        questions.innerHTML = `<h2 id="results"><b>Quiz completed..Oops! Your score is ${bonus}.</b></h2>`;
+                        const back = document.getElementById("dbody");
+                        back.style.backgroundImage = "url('try.jpg')";
+                        back.style.backgroundSize = "cover";
+                        document.getElementById("starts").style.display="none"; 
+                    }
+                    clearInterval(intervalID);
+                    timer.innerHTML = "";
+                }
+                else 
+                {
+                    displayQuestion(questionsData, i);
+                    i++;
+                }
+            }
+            function Timer()//timer display function 
+            {
+                let t = 1;
+                timer.innerHTML = `Timer: ${t}`;
+                intervalID = setInterval(() => {
+                    t++;
+                    timer.innerHTML = `Timer: ${t}`;
+                    if (t>=10) 
+                    {
+                        document.getElementById('corrects').style.display="none";
+                        clearInterval(intervalID);
+                        displayNextQues();
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
